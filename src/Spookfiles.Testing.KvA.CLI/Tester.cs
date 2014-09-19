@@ -514,9 +514,8 @@ namespace Spookfiles.Testing.KvA.CLI
         private static string GetStartAndEndTime()
         {
             return string.Format("start_time={0}&end_time={1}",
-                //DateTime.UtcNow.AddHours(-4).ToString("O"), 
-                "0001-01-01T01:00:00.0000000",
-                DateTime.UtcNow.ToString("O"));
+                DateTime.UtcNow.AddHours(-4).ToString(Options.DateTimeFormat), 
+                DateTime.UtcNow.ToString(Options.DateTimeFormat));
         }
 
         private static string GetTrafficStateLatest()
