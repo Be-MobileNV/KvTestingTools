@@ -3,62 +3,6 @@ using System.Collections.Generic;
 
 namespace Spookfiles.Koppelvlak.A
 {
-    //public class Eventsrequest
-    //{
-    //    /// <summary>
-    //    ///     Wegsegment(en) gescheiden door een komma.
-    //    /// </summary>
-    //    public List<long> segment_id { get; set; }
-
-    //    /// <summary>
-    //    ///     Databron(nen), gescheiden door een komma.
-    //    /// </summary>
-    //    public List<int> feed_id { get; set; }
-
-    //    /// <summary>
-    //    ///     Maximale leeftijd van een meting in seconden.
-    //    /// </summary>
-    //    public int? max_age { get; set; }
-    //}
-
-
-    //public class Eventshistoricrequest
-    //{
-    //    /// <summary>
-    //    ///     Wegsegment(en) gescheiden door een komma.
-    //    /// </summary>
-    //    public List<long> segment_id { get; set; }
-
-    //    /// <summary>
-    //    ///     Databron(nen), gescheiden door een komma.
-    //    /// </summary>
-    //    public List<int> feed_id { get; set; }
-
-    //    /// <summary>
-    //    ///     Vanaf moment (inclusief)
-    //    /// </summary>
-    //    public DateTime? start_time { get; set; }
-
-    //    /// <summary>
-    //    ///     Tot moment (inclusief)
-    //    /// </summary>
-    //    public DateTime? end_time { get; set; }
-    //}
-
-
-    //public class Eventsrealtimerequest
-    //{
-    //    /// <summary>
-    //    ///     Wegsegment(en) gescheiden door een komma.
-    //    /// </summary>
-    //    public List<long> segment_id { get; set; }
-
-    //    /// <summary>
-    //    ///     Databron(nen), gescheiden door een komma.
-    //    /// </summary>
-    //    public List<int> feed_id { get; set; }
-    //}
-
     public class TrafficEvent
     {
         /*
