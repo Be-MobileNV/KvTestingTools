@@ -38,7 +38,7 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Trafficstate>) o)
                         {
-                            if (i.publication_time > DateTime.UtcNow)
+                            if (i.publication_time.ToUniversalTime()> DateTime.UtcNow)
                                 return false;
                             if (i.speed >= 150 || i.speed < 0)
                                 return false;
@@ -65,7 +65,7 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Trafficstate>) o)
                         {
-                            if (i.publication_time > DateTime.UtcNow)
+                            if (i.publication_time.ToUniversalTime() > DateTime.UtcNow)
                                 return false;
                             if (i.speed >= 150 || i.speed < 0)
                                 return false;
@@ -91,14 +91,14 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<TrafficEvent>) o)
                         {
-                            if (i.start_time >= DateTime.UtcNow)
+                            if (i.start_time.Value.ToUniversalTime() >= DateTime.UtcNow)
                                 return false;
 
                             if (i.event_code.Any(eventCode => eventCode < 1 || eventCode > 255))
                                 return false;
 
-                            if (i.update_time < i.start_time)
-                                // note: if traffic events in the future are allowed, this should also be removed.
+                            if (i.start_time > i.expected_end_time)
+                            //    // note: if traffic events in the future are allowed, this should also be removed.
                                 return false;
 
                             if (i.expected_end_time < DateTime.UtcNow)
@@ -123,14 +123,14 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<TrafficEvent>) o)
                         {
-                            if (i.start_time >= DateTime.UtcNow)
+                            if (i.start_time.Value.ToUniversalTime() >= DateTime.UtcNow)
                                 return false;
 
                             if (i.event_code.Any(eventCode => eventCode < 1 || eventCode > 255))
                                 return false;
 
-                            if (i.update_time < i.start_time)
-                                // note: if traffic events in the future are allowed, this should also be removed.
+                            if (i.start_time > i.expected_end_time)
+                            //    // note: if traffic events in the future are allowed, this should also be removed.
                                 return false;
 
                             //if (i.expected_end_time < DateTime.UtcNow) -> should be ok for historic
@@ -154,7 +154,7 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Weatherstate>) o)
                         {
-                            if (i.measurement_time > DateTime.UtcNow)
+                            if (i.measurement_time.ToUniversalTime() > DateTime.UtcNow)
                                 return false;
 
                             if (i.segment_id.Count == 0)
@@ -179,7 +179,7 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Weatherstate>) o)
                         {
-                            if (i.measurement_time > DateTime.UtcNow)
+                            if (i.measurement_time.ToUniversalTime() > DateTime.UtcNow)
                                 return false;
 
                             if (i.segment_id.Count == 0)
@@ -203,14 +203,14 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Weatherforecast>) o)
                         {
-                            if (i.measurement_time > DateTime.UtcNow)
-                                return false;
+                            //if (i.measurement_time.ToUniversalTime() > DateTime.UtcNow)
+                            //    return false;
 
                             if (i.segment_id.Count == 0)
                                 return false;
 
-                            if (i.measurement_time < DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(15)))
-                                return false;
+                            //if (i.measurement_time.ToUniversalTime() < DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(15)))
+                            //    return false;
                         }
                         return true;
                     }
@@ -231,14 +231,14 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Weatherforecast>) o)
                         {
-                            if (i.measurement_time > DateTime.UtcNow)
-                                return false;
+                            //if (i.measurement_time.ToUniversalTime() > DateTime.UtcNow)
+                            //    return false;
 
                             if (i.segment_id.Count == 0)
                                 return false;
 
-                            if (i.measurement_time < DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(15)))
-                                return false;
+                            //if (i.measurement_time.ToUniversalTime() < DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(15)))
+                            //    return false;
                         }
                         return true;
                     }
@@ -258,7 +258,7 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Segmentstate>) o)
                         {
-                            if (i.update_time > DateTime.UtcNow)
+                            if (i.update_time.ToUniversalTime() > DateTime.UtcNow)
                                 return false;
 
                             // todo: add more sanity checks here.
@@ -283,7 +283,7 @@ namespace Spookfiles.Testing.KvA.CLI
                     {
                         foreach (var i in (List<Segmentstate>) o)
                         {
-                            if (i.update_time > DateTime.UtcNow)
+                            if (i.update_time.ToUniversalTime() > DateTime.UtcNow)
                                 return false;
 
                             // todo: add more sanity checks here.
@@ -514,8 +514,9 @@ namespace Spookfiles.Testing.KvA.CLI
         private static string GetStartAndEndTime()
         {
             return string.Format("start_time={0}&end_time={1}",
-                //DateTime.UtcNow.AddHours(-4).ToString("O"), 
-                "0001-01-01T01:00:00.0000000",
+                                 //DateTime.UtcNow.AddHours(-4).ToString("O"), 
+                                 //"0001-01-01T01:00:00.0000000",
+                DateTime.UtcNow.AddHours(-1).ToString("O"),
                 DateTime.UtcNow.ToString("O"));
         }
 
@@ -526,8 +527,7 @@ namespace Spookfiles.Testing.KvA.CLI
 
         private static string GetTrafficStateHistoric()
         {
-            return string.Format("/trafficstate/historic?{0}", GetStartAndEndTime(), Options.SegmentCSV);
-            // &segment_id={1}
+            return string.Format("/trafficstate/historic?{0}&segment_id={1}", GetStartAndEndTime(), Options.SegmentCSV);
         }
 
         private static string GetWeatherStateLatest()

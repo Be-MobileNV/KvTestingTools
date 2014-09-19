@@ -27,14 +27,14 @@ namespace Spookfiles.Koppelvlak.A
         public static List<string> FieldsThatShouldBePresentInSegmentState()
         {
             var list = new List<string>();
-            list.AddRange(new[] {"segment_id", "update_time", "type", "value", "feed_id", "start_time"});
+            list.AddRange(new[] {"segment_id", "update_time", "type", "value", "feed_id"});
             return list;
         }
 
         public static List<string> FieldsThatShouldBePresentInRoadSegments()
         {
             var list = new List<string>();
-            list.AddRange(new[] {"lane", "max_speed", "length", "location", "ìd"});
+            list.AddRange(new[] {"lane", "max_speed", "length", "location", "id"});
             return list;
         }
 
