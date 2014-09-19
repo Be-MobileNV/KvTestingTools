@@ -58,7 +58,6 @@ namespace Spookfiles.Testing.KvA.CLI
                 HelpText txt = HelpText.AutoBuild(options);
                 Out.Info(txt.ToString());
             }
-            Console.ReadLine();
         }
     }
 }

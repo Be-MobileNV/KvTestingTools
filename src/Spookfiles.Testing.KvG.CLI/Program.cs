@@ -58,7 +58,6 @@ namespace Spookfiles.Testing.CLI
                 HelpText txt = HelpText.AutoBuild(options);
                 Out.Info(txt.ToString());
             }
-            Console.ReadLine();
         }
     }
 }

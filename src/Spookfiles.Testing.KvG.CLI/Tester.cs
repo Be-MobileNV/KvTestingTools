@@ -21,7 +21,7 @@ namespace Spookfiles.Testing.CLI
                 new TcpConnectionTest(),
                 new HttpServiceOnlineTest(),
                 new HttpResponseValidTest {RelativeUrl = "/fcd"});
-        }
+        }   
 
         internal static void RunFunctionalityTests(Options options)
         {
