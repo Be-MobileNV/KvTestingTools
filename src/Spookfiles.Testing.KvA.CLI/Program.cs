@@ -16,13 +16,22 @@ namespace Spookfiles.Testing.KvA.CLI
         private static void Main(string[] args)
         {
 #if DEBUG
+            //args = new[]
+            //{
+            //    "--all",
+            //    "--url", "http://yourtesturl",
+            //    "--apikey", "MyFamousApiKey",
+            //    "--user", "TheOneAndOnlyKvAUser",
+            //    "--pass", "MyVeryHardToGuesspassword"
+            //};
+
             args = new[]
             {
-                "--all",
-                "--url", "http://yourtesturl",
-                "--apikey", "MyFamousApiKey",
-                "--user", "TheOneAndOnlyKvAUser",
-                "--pass", "MyVeryHardToGuesspassword"
+			    "--all",
+                "--url", "https://spookfiles.be-mobile.biz/kva",
+                "--apikey", "Be-Mobile",
+                "--user", "kva-bm",
+                "--pass", "kva-test2014"	
             };
 #endif
             var options = new Options();

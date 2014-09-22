@@ -13,10 +13,10 @@ namespace Spookfiles.Testing.Testrunners
             UseNoCredentials
         }
 
-        protected WebClient SetupWebClient(Options o,
+        protected WebClientEx SetupWebClient(Options o,
             AuthenticationMode validCredentials = AuthenticationMode.UseValidCredentials)
         {
-            var c = new WebClient();
+            var c = new WebClientEx();
             c.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
             if (!String.IsNullOrEmpty(o.ApiKey) && validCredentials != AuthenticationMode.UseNoCredentials)

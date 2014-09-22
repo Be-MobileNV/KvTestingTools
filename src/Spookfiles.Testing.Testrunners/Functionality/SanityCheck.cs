@@ -20,9 +20,9 @@ namespace Spookfiles.Testing.Testrunners.Functionality
             };
             try
             {
-                WebClient webClient = SetupWebClient(o);
+                WebClientEx webClient = SetupWebClient(o);
                 string responseData = Encoding.UTF8.GetString(webClient.DownloadData(o.Url + RelativeUrl));
-                if (responseData == "[]")
+                if (responseData == "[]" || webClient.StatusCode == HttpStatusCode.NoContent)
                 {
                     res.Status = TestResult.INCONCLUSIVE;
                     res.ExtraInformation = "NO DATA at " + RelativeUrl;

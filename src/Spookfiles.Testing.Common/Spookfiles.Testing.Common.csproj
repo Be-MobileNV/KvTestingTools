@@ -49,6 +49,9 @@
     <Compile Include="SubTests.cs" />
     <Compile Include="TestResult.cs" />
     <Compile Include="TestResultBase.cs" />
+    <Compile Include="WebClientEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

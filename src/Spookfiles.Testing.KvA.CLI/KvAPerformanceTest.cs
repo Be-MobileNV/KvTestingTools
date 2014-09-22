@@ -88,7 +88,7 @@ namespace Spookfiles.Testing.KvA.CLI
             else
             {
                 testResult.Status = TestResult.FAIL;
-                testResult.CauseOfFailure = "Percentage success: " + percentageSuccess;
+                testResult.CauseOfFailure = "Percentage success: " + percentageSuccess + "%";
             }
 
             return testResult;

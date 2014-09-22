@@ -46,8 +46,10 @@ namespace Spookfiles.Testing.CLI
                 var test = new CheckCompletenessResponseTest
                 {
                     RelativeUrl = string.Format("/fcd?last_message_time={0}", lastMessageTime),
-                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInFCD()
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInFCD(),
+                    TestResultWhenNoData = TestResult.OK
                 };
+               
                 TestResultBase res = test.Test(o);
                 results.Add(new Tuple<long, TestResult>(test.RequestDuration, res.Status));
 
@@ -70,6 +72,10 @@ namespace Spookfiles.Testing.CLI
                     }
                     lastMessageTime = fcdMsg.message_time;
                 }
+                else
+                {
+                    GenerationTimeValid = false;
+                }
                 Thread.Sleep(IntervalTime);
                 if (DateTime.Now.Subtract(current).TotalSeconds >= TestDuration)
                     break;
@@ -88,10 +94,11 @@ namespace Spookfiles.Testing.CLI
             else
             {
                 testResult.Status = TestResult.FAIL;
-                testResult.CauseOfFailure = "Percentage success: " + percentageSuccess;
+                testResult.CauseOfFailure = "Percentage success: " + percentageSuccess + "%";
             }
 
             return testResult;
         }
+
     }
 }

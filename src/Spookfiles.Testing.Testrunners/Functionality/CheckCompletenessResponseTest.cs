@@ -27,6 +27,8 @@ namespace Spookfiles.Testing.Testrunners.Functionality
 
         public List<string> FieldsThatShouldBePresent { get; set; }
 
+        public TestResult? TestResultWhenNoData { get; set; }
+
         public TestResultBase Test(Options o)
         {
             var res = new GenericTestResult
@@ -36,7 +38,7 @@ namespace Spookfiles.Testing.Testrunners.Functionality
             };
             try
             {
-                WebClient c = SetupWebClient(o);
+                WebClientEx c = SetupWebClient(o);
 
                 if (OnSetupWebClient != null)
                     OnSetupWebClient(c);
@@ -44,9 +46,12 @@ namespace Spookfiles.Testing.Testrunners.Functionality
                 var watch = new Stopwatch();
                 watch.Start();
                 string data = Encoding.UTF8.GetString(c.DownloadData(o.Url + RelativeUrl));
-                if (data == "[]")
+              
+                
+                if (data == "[]" || c.StatusCode == HttpStatusCode.NoContent)
                 {
-                    res.Status = TestResult.INCONCLUSIVE;
+
+                    res.Status = TestResultWhenNoData.HasValue ? TestResultWhenNoData.Value : TestResult.INCONCLUSIVE;
                     res.ExtraInformation = "NO DATA at " + RelativeUrl;
                     return res;
                 }

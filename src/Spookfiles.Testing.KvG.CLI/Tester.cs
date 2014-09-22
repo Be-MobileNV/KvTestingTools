@@ -36,15 +36,44 @@ namespace Spookfiles.Testing.CLI
                 new SanityCheck()
                 {
                     RelativeUrl = FcdRetrieveRequestWithTime(),
-                    TypeToDeserialize = typeof (FcdMessage),
+                    TypeToDeserialize = typeof(FcdMessage),
                     CheckValidDataInsideFunctionHandler = o =>
                     {
-                        var fcd = (List<FcdMessage>) o;
-                        if (fcd.Count == 0)
-                            return false;
-                        foreach (var fcdMessage in fcd)
+                        var fcd = (FcdMessage)o;
+                        if (fcd.provider_id == null) return false;
+                        if (fcd.fcd_records.Count == 0) return false;
+                        foreach (var fcdrecord in fcd.fcd_records)
                         {
-                            
+                            if (fcdrecord.user_id_anonymous == 0) return false;
+                            foreach (var trail in fcdrecord.trail)
+                            {
+                                if (trail.generation_time.ToUniversalTime() > DateTime.UtcNow)
+                                {
+                                    return false;
+                                }
+                                if (trail.speed < 0 || trail.speed > 150)
+                                {
+                                    return false;
+                                }
+                                if (trail.ref_position_lat < 51.482733 || trail.ref_position_lat > 51.555198)
+                                {
+                                    return false;
+                                }
+                                if (trail.ref_position_lon < 5.116459 || trail.ref_position_lon > 5.393983)
+                                {
+                                    return false;
+                                }
+                                if (trail.heading < 0 || trail.heading > 360)
+                                {
+                                    return false;
+                                }
+
+                                // Check Not implimented no valid time to countermeasure with
+                                //if (trail.generation_time.ToUniversalTime() < DateTime.UtcNow.AddMinutes(-2))
+                                //{
+                                //    return false;
+                                //}
+                            }
                         }
 
 
@@ -63,7 +92,7 @@ namespace Spookfiles.Testing.CLI
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInFCD()
                 },
                 // 1                 // note: this is the same test as runfunctionality - the last one.
-                new CheckCertificateTest { RelativeUrl = FcdRetrieveRequest()}, // 2    
+                new CheckCertificateTest { RelativeUrl = FcdRetrieveRequest() }, // 2    
                 new CallingWithInvalidCredentials
                 {
                     RelativeUrl = FcdRetrieveRequest(),
@@ -74,7 +103,7 @@ namespace Spookfiles.Testing.CLI
                     RelativeUrl = FcdRetrieveRequest(),
                     UseCredentials = HttpTestBase.AuthenticationMode.UseNoCredentials
                 }, // 4
-                new CheckHttpAvailableTest { RelativeUrl = FcdRetrieveRequest()} // 5
+                new CheckHttpAvailableTest { RelativeUrl = FcdRetrieveRequest() } // 5
                 );
         }
 
@@ -140,10 +169,10 @@ namespace Spookfiles.Testing.CLI
         {
             return "/fcd?last_message_time=0";
         }
-    
-    
-    
-    
-    
+
+
+
+
+
     }
 }
