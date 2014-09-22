@@ -25,14 +25,6 @@ namespace Spookfiles.Testing.KvA.CLI
             //    "--pass", "MyVeryHardToGuesspassword"
             //};
 
-            args = new[]
-            {
-			    "--all",
-                "--url", "https://spookfiles.be-mobile.biz/kva",
-                "--apikey", "Be-Mobile",
-                "--user", "kva-bm",
-                "--pass", "kva-test2014"	
-            };
 #endif
             var options = new Options();
             if (Parser.Default.ParseArguments(args, options))
