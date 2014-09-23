@@ -51,25 +51,11 @@ namespace Spookfiles.Testing.KvA.CLI
                 TestResultBase res = test.Test(o);
                 results.Add(new Tuple<long, TestResult>(test.RequestDuration, res.Status));
 
-                if (test.ResponseData != null)
-                {
-                    // now store the last updated time from the previous
-                    string data = test.ResponseData;
-                    // deserialize
-                    //var fcdMsg = JsonConvert.DeserializeObject<FcdMessage>(data);
-
-                    //if (lastMessageTime == fcdMsg.message_time)
-                    //{
-                    //    // todo: check with wim vdb if we really need to check this??
-                    //    GenerationTimeValid = false;
-                    //}
-                    //else
-                    //{
-                    //    if (!GenerationTimeValid.HasValue)
-                    //        GenerationTimeValid = true;
-                    //}
-                    //lastMessageTime = fcdMsg.message_time;
-                }
+                //if (test.ResponseData != null)
+                //{
+                //    // now store the last updated time from the previous
+                //    string data = test.ResponseData;
+                //}
                 Thread.Sleep(IntervalTime);
                 if (DateTime.Now.Subtract(current).TotalSeconds >= TestDuration)
                     break;
