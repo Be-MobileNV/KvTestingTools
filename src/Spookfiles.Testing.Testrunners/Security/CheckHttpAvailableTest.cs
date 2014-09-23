@@ -21,9 +21,7 @@ namespace Spookfiles.Testing.Testrunners.Security
             {
                 WebClient c = SetupWebClient(o);
                 string data = Encoding.UTF8.GetString(c.DownloadData((o.Url + RelativeUrl).Replace("https", "http")));
-                if (c.ResponseHeaders["Content-Type"].ToLowerInvariant().Contains("application/json")
-                    && c.ResponseHeaders["Content-Type"].ToLowerInvariant().Contains("charset=utf-8")
-                    )
+                if (HttpValidationTests.IsValidJson(c.ResponseHeaders) && HttpValidationTests.IsValidCharsetUtf8(c.ResponseHeaders))
                 {
                     if (data.Contains("generation_time") && data.Contains("ref_position_lon") &&
                         data.Contains("ref_position_lat") && data.Contains("speed")
