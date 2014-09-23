@@ -21,13 +21,9 @@ namespace Spookfiles.Testing.Testrunners.Functionality
             {
                 var c = new WebClient();
                 byte[] data = c.DownloadData(o.Url + RelativeUrl);
-                if (c.ResponseHeaders["Content-Type"].ToLowerInvariant().Contains("application/json"))
-                {
-                    if (c.ResponseHeaders["Charset"].ToLowerInvariant().Contains("utf-8"))
-                    {
+
+                if (HttpValidationTests.IsValidJson(c.ResponseHeaders) && HttpValidationTests.IsValidCharsetUtf8(c.ResponseHeaders))
                         res.Status = TestResult.OK;
-                    }
-                }
                 else
                 {
                     res.Status = TestResult.FAIL;

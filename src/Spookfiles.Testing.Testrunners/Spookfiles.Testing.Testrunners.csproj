@@ -49,6 +49,7 @@
     <Compile Include="Functionality\HttpResponseValidTests.cs" />
     <Compile Include="Functionality\SanityCheck.cs" />
     <Compile Include="HttpTestBase.cs" />
+    <Compile Include="HttpValidationTests.cs" />
     <Compile Include="Performance\PerformanceTest.cs" />
     <Compile Include="RunTesterBase.cs" />
     <Compile Include="Security\CheckCertificateTest.cs" />

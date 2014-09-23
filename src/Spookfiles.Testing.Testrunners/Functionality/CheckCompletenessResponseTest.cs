@@ -60,9 +60,7 @@ namespace Spookfiles.Testing.Testrunners.Functionality
                 ResponseData = data;
                 RequestDuration = watch.ElapsedMilliseconds;
 
-                if (c.ResponseHeaders["Content-Type"].ToLowerInvariant().Contains("application/json")
-                    && c.ResponseHeaders["Content-Type"].ToLowerInvariant().Contains("charset=utf-8")
-                    )
+                if (HttpValidationTests.IsValidJson(c.ResponseHeaders) && HttpValidationTests.IsValidCharsetUtf8(c.ResponseHeaders))
                 {
                     if (FieldsThatShouldBePresent.All(data.Contains))
                         res.Status = TestResult.OK;

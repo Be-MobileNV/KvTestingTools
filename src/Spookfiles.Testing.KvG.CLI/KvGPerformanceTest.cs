@@ -62,7 +62,6 @@ namespace Spookfiles.Testing.CLI
 
                     if (lastMessageTime == fcdMsg.message_time)
                     {
-                        // todo: check with wim vdb if we really need to check this??
                         GenerationTimeValid = false;
                     }
                     else
