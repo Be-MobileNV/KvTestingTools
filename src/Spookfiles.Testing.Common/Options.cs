@@ -39,12 +39,12 @@ namespace Spookfiles.Testing.Common
         /// <summary>
         ///     Performance duration, in seconds
         /// </summary>
-        public const int ContinuityTestDuration = 20;
+        public const int ContinuityTestDuration = 600;
 
         /// <summary>
         ///     Performance test interval in milliseconds
         /// </summary>
-        public const int ContinuityTestInterval = 2000;
+        public const int ContinuityTestInterval = 5000;
 #else
     /// <summary>
     /// Performance duration, in seconds
