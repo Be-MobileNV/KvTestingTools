@@ -22,7 +22,7 @@ namespace Spookfiles.Testing.Common
         /// <summary>
         ///     Performance test interval in milliseconds
         /// </summary>
-        public const int PerformanceTestInterval = 2000;
+        public const int PerformanceTestInterval = 15000;
 #else
     /// <summary>
     /// Performance duration, in seconds

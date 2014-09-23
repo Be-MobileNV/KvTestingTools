@@ -428,7 +428,7 @@ namespace Spookfiles.Testing.KvA.CLI
 
         internal static void RunContinuityTests(Options options)
         {
-            RunTests(options, "Continuity", Out.Info,
+            RunTestsParallel(options, "Continuity", Out.Info,
                 new KvAPerformanceTest
                 {
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInTrafficState(),
