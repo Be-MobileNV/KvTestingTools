@@ -37,6 +37,7 @@ namespace Spookfiles.Testing.KvA.CLI
                 Status = TestResult.INCONCLUSIVE
             };
 
+
             DateTime current = DateTime.Now; // to check if we elapsed total seconds.
             var results = new List<Tuple<long, TestResult>>();
             //long lastMessageTime = 0;
@@ -61,9 +62,11 @@ namespace Spookfiles.Testing.KvA.CLI
                     break;
             }
 
-            IEnumerable<Tuple<long, TestResult>> succesCount = results.Where(t => t.Item2 == TestResult.OK);
-            double percentageSuccess = succesCount.Count()/(double) results.Count;
-            double avgTime = results.Select(t => t.Item1).Average();
+            IEnumerable<Tuple<long, TestResult>> succesCount = results.Where(t => t.Item2 == TestResult.OK).ToList();
+
+            var totalResultCount = results.Count;
+            double percentageSuccess = totalResultCount == 0 ? 0 : succesCount.Count() / (double)totalResultCount;
+            double avgTime = succesCount.Select(t => t.Item1).Average();
 
             testResult.ExtraInformation = Math.Round(avgTime, 0) + " ms average time";
 
@@ -74,7 +77,7 @@ namespace Spookfiles.Testing.KvA.CLI
             else
             {
                 testResult.Status = TestResult.FAIL;
-                testResult.CauseOfFailure = "Percentage success: " + percentageSuccess + "%";
+                testResult.CauseOfFailure = "Percentage success: " + Math.Round(percentageSuccess * 100)  + "%";
             }
 
             return testResult;

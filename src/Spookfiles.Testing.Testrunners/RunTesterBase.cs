@@ -20,6 +20,7 @@ namespace Spookfiles.Testing.Testrunners
                 TestResultBase result = null;
                 try
                 {
+
                     result = test.Test(o);
                     result.StepNr = i;
                     result.SubTest = subTest;
