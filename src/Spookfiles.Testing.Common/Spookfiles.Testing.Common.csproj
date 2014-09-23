@@ -45,7 +45,6 @@
     <Compile Include="ITest.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunTesterBase.cs" />
     <Compile Include="SubTests.cs" />
     <Compile Include="TestResult.cs" />
     <Compile Include="TestResultBase.cs" />

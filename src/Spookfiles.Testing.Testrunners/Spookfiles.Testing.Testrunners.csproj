@@ -50,6 +50,7 @@
     <Compile Include="Functionality\SanityCheck.cs" />
     <Compile Include="HttpTestBase.cs" />
     <Compile Include="Performance\PerformanceTest.cs" />
+    <Compile Include="RunTesterBase.cs" />
     <Compile Include="Security\CheckCertificateTest.cs" />
     <Compile Include="Security\CallingWithInvalidCredentials.cs" />
     <Compile Include="GenericTestResult.cs" />
