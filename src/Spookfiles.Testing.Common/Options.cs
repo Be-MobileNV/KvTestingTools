@@ -56,6 +56,26 @@ namespace Spookfiles.Testing.Common
         public const int ContinuityTestInterval = 30 * 1000;
 #endif
 
+#if DEBUG
+        /// <summary>
+        /// History calls: Set number of minutes back in time for start datetime
+        /// </summary>
+        public const int HistoryStartBackInTime = 30;
+        /// <summary>
+        /// History calls: Set number of minutes back in time for end datetime
+        /// </summary>
+        public const int HistoryEndBackInTime = 15;
+#else
+        /// <summary>
+        /// History calls: Set number of minutes back in time for start datetime
+        /// </summary>
+        public const int HistoryStartBackInTime = 30;
+        /// <summary>
+        /// History calls: Set number of minutes back in time for end datetime
+        /// </summary>
+        public const int HistoryEndBackInTime = 15;
+#endif
+
         [Option("Connectivity", DefaultValue = false, HelpText = "Run the connectivity tests")]
         public bool Connectivity { get; set; }
 
