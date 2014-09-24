@@ -66,7 +66,7 @@ namespace Spookfiles.Testing.KvA.CLI
 
             var totalResultCount = results.Count;
             double percentageSuccess = totalResultCount == 0 ? 0 : succesCount.Count() / (double)totalResultCount;
-            double avgTime = succesCount.Select(t => t.Item1).Average();
+            double avgTime = succesCount.Any() ? succesCount.Select(t => t.Item1).Average() : -1;
 
             testResult.ExtraInformation = Math.Round(avgTime, 0) + " ms average time";
 
