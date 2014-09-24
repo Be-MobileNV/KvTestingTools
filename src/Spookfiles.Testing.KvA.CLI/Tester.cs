@@ -345,7 +345,7 @@ namespace Spookfiles.Testing.KvA.CLI
 
         internal static void RunPerformanceTests(Options options)
         {
-            RunTests(options, "Performance", Out.Info,
+            RunTestsParallel(options, "Performance", Out.Info,
                 new KvAPerformanceTest
                 {
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInTrafficState(),
@@ -559,7 +559,7 @@ namespace Spookfiles.Testing.KvA.CLI
         {
             return "/segmentstate/latest";
         }
-
+        
         private static string GetSegmentStateHistoric()
         {
             return string.Format("/segmentstate/historic?{0}", GetStartAndEndTime());

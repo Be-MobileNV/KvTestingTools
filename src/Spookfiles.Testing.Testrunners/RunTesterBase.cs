@@ -53,8 +53,6 @@ namespace Spookfiles.Testing.Testrunners
                 result = test.Test(o);
                 result.StepNr = i;
                 result.SubTest = subTest;
-                if (logger != null)
-                    logger(result.ToString());
             }
             catch (Exception ex)
             {
@@ -68,6 +66,8 @@ namespace Spookfiles.Testing.Testrunners
                 result.CauseOfFailure = ex.Message;
                 result.ExtraInformation = ex.StackTrace;
             }
+            if (logger != null)
+                logger(result.ToString());
         }
     }
 }
