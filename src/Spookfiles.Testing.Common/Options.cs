@@ -10,7 +10,7 @@ namespace Spookfiles.Testing.Common
         public const string InvalidApiKey = "nowaythisisavalidkey";
         public const string InvalidUserName = "wronguser";
         public const string InvalidPassword = "wrongpass";
-        public const string SegmentCSV = "698058";
+        public const string DefaultSegmentCsv = "1662180";
         public const string DateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss.fff";
 
 #if DEBUG
@@ -111,6 +111,9 @@ namespace Spookfiles.Testing.Common
 
         [Option("Pass", HelpText = "The pass to use for basic Auth")]
         public string Pass { get; set; }
+
+        [Option("SegmentCsv", HelpText = "CommaSeperated list of segment ids to test")]
+        public string SegmentCsv { get; set; }
 
         public Dictionary<string, string> Parameters { get; set; }
     }
