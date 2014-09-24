@@ -21,7 +21,7 @@ namespace Spookfiles.Testing.CLI
                 new PingTest(),
                 new TcpConnectionTest(),
                 new HttpServiceOnlineTest(),
-                new HttpResponseValidTest { RelativeUrl = FcdRetrieveRequest() });
+                new HttpResponseValidTest { RelativeUrl = FcdRetrieveRequestWithTime() });
         }
 
         internal static void RunFunctionalityTests(Options options)
@@ -92,18 +92,18 @@ namespace Spookfiles.Testing.CLI
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInFCD()
                 },
                 // 1                 // note: this is the same test as runfunctionality - the last one.
-                new CheckCertificateTest { RelativeUrl = FcdRetrieveRequest() }, // 2    
+                new CheckCertificateTest { RelativeUrl = FcdRetrieveRequestWithTime() }, // 2    
                 new CallingWithInvalidCredentials
                 {
-                    RelativeUrl = FcdRetrieveRequest(),
+                    RelativeUrl = FcdRetrieveRequestWithTime(),
                     UseCredentials = HttpTestBase.AuthenticationMode.UseInvalidCredentials
                 }, // 3
                 new CallingWithInvalidCredentials
                 {
-                    RelativeUrl = FcdRetrieveRequest(),
+                    RelativeUrl = FcdRetrieveRequestWithTime(),
                     UseCredentials = HttpTestBase.AuthenticationMode.UseNoCredentials
                 }, // 4
-                new CheckHttpAvailableTest { RelativeUrl = FcdRetrieveRequest() } // 5
+                new CheckHttpAvailableTest { RelativeUrl = FcdRetrieveRequestWithTime() } // 5
                 );
         }
 
@@ -111,7 +111,7 @@ namespace Spookfiles.Testing.CLI
         {
             var test = new KvGPerformanceTest
             {
-                RelativeUrl = FcdRetrieveRequest(),
+                RelativeUrl = FcdRetrieveRequestWithTime(),
                 IntervalTime = Options.PerformanceTestInterval,
                 TestDuration = Options.PerformanceTestDuration,
             };

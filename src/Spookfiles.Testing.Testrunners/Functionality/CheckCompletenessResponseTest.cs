@@ -38,7 +38,7 @@ namespace Spookfiles.Testing.Testrunners.Functionality
             };
             try
             {
-                WebClientEx c = SetupWebClient(o);
+                var c = SetupWebClient(o);
 
                 if (OnSetupWebClient != null)
                     OnSetupWebClient(c);
@@ -47,7 +47,6 @@ namespace Spookfiles.Testing.Testrunners.Functionality
                 watch.Start();
                 string data = Encoding.UTF8.GetString(c.DownloadData(o.Url + RelativeUrl));
               
-                
                 if (data == "[]" || c.StatusCode == HttpStatusCode.NoContent)
                 {
 
