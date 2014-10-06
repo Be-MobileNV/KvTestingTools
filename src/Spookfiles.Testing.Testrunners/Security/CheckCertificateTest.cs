@@ -90,6 +90,7 @@ namespace Spookfiles.Testing.Testrunners.Security
                     };
                 HttpWebRequest req = SetupWebRequest(o, o.Url + RelativeUrl);
                 var response = (HttpWebResponse) req.GetResponse();
+                response.Close();
             }
             catch (Exception ex)
             {
