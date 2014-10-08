@@ -51,15 +51,15 @@ namespace Spookfiles.Testing.KvA.CLI
                     }
                 },
 
-                new HttpResponseValidTest { RelativeUrl = GetTrafficStateHistoric() }, // traffic state historic
+                new HttpResponseValidTest { RelativeUrl = GetTrafficStateHistoric(options.SegmentCsv) }, // traffic state historic
                 new CheckCompletenessResponseTest
                 {
-                    RelativeUrl = GetTrafficStateHistoric(),
+                    RelativeUrl = GetTrafficStateHistoric(options.SegmentCsv),
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInTrafficState()
                 },
                 new SanityCheck()
                 {
-                    RelativeUrl = GetTrafficStateHistoric(),
+                    RelativeUrl = GetTrafficStateHistoric(options.SegmentCsv),
                     TypeToDeserialize = typeof(List<Trafficstate>),
                     CheckValidDataInsideFunctionHandler = o =>
                     {
@@ -356,7 +356,7 @@ namespace Spookfiles.Testing.KvA.CLI
                 new KvAPerformanceTest
                 {
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInTrafficState(),
-                    RelativeUrl = GetTrafficStateHistoric(),
+                    RelativeUrl = GetTrafficStateHistoric(options.SegmentCsv),
                     IntervalTime = Options.PerformanceTestInterval,
                     TestDuration = Options.PerformanceTestDuration
                 },
@@ -439,7 +439,7 @@ namespace Spookfiles.Testing.KvA.CLI
                 new KvAPerformanceTest
                 {
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInTrafficState(),
-                    RelativeUrl = GetTrafficStateHistoric(),
+                    RelativeUrl = GetTrafficStateHistoric(options.SegmentCsv),
                     IntervalTime = Options.ContinuityTestInterval,
                     TestDuration = Options.ContinuityTestDuration
                 },
@@ -525,9 +525,9 @@ namespace Spookfiles.Testing.KvA.CLI
             return "/trafficstate/latest";
         }
 
-        private static string GetTrafficStateHistoric()
+        private static string GetTrafficStateHistoric(string segmentsCsv)
         {
-            return string.Format("/trafficstate/historic?{0}&segment_id={1}", GetStartAndEndTime(), Options.SegmentCSV);
+            return string.Format("/trafficstate/historic?{0}&segment_id={1}", GetStartAndEndTime(), segmentsCsv ?? Options.DefaultSegmentCsv);
         }
 
         private static string GetWeatherStateLatest()
@@ -559,7 +559,7 @@ namespace Spookfiles.Testing.KvA.CLI
         {
             return "/segmentstate/latest";
         }
-        
+
         private static string GetSegmentStateHistoric()
         {
             return string.Format("/segmentstate/historic?{0}", GetStartAndEndTime());

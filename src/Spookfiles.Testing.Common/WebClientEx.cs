@@ -11,6 +11,14 @@ namespace Spookfiles.Testing.Common
             return _resp = base.GetWebResponse(req);
         }
 
+        protected override WebRequest GetWebRequest(System.Uri address)
+        {
+            WebRequest request = (WebRequest)base.GetWebRequest(address);
+
+            request.PreAuthenticate = true;
+            return request;
+        }
+
         public HttpStatusCode StatusCode
         {
             get
