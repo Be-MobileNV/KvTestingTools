@@ -30,11 +30,11 @@ namespace Spookfiles.Testing.Testrunners.Connectivity
             catch (WebException wex)
             {
                 var response = (HttpWebResponse) wex.Response;
-                if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.ServiceUnavailable)
-                {
+                //if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.ServiceUnavailable || response.StatusCode == HttpStatusCode.NotFound)
+                //{
                     res.Status = TestResult.OK;
                     res.ExtraInformation = "Ok - HTTP confirmed. Received " + response.StatusCode;
-                }
+                //}
             }
             catch (Exception ex)
             {

@@ -21,6 +21,11 @@ namespace Spookfiles.Testing.Testrunners.Security
             {
                 WebClient c = SetupWebClient(o);
                 string data = Encoding.UTF8.GetString(c.DownloadData((o.Url + RelativeUrl).Replace("https", "http")));
+                if (c.ResponseHeaders["Location"] != null && c.ResponseHeaders["Location"].Contains("https"))
+                {
+                    res.Status = TestResult.OK;
+                    res.ExtraInformation = "Using redirect";
+                }
                 if (HttpValidationTests.IsValidJson(c.ResponseHeaders) && HttpValidationTests.IsValidCharsetUtf8(c.ResponseHeaders))
                 {
                     if (data.Contains("generation_time") && data.Contains("ref_position_lon") &&
