@@ -93,7 +93,7 @@ namespace Spookfiles.Testing.CLI
             else
             {
                 testResult.Status = TestResult.FAIL;
-                testResult.CauseOfFailure = "Percentage success: " + percentageSuccess + "%";
+                testResult.CauseOfFailure = "Percentage success: " + Math.Round(percentageSuccess * 100, 0) + " %";
             }
 
             return testResult;
