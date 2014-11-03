@@ -11,7 +11,7 @@ namespace Spookfiles.Testing.Common
         public const string InvalidUserName = "wronguser";
         public const string InvalidPassword = "wrongpass";
         public const string DefaultSegmentCsv = "1662180";
-        public const string DateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss.fff";
+        public const string DateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss.fffZ";
 
 #if DEBUG
         /// <summary>
