@@ -51,5 +51,12 @@ namespace Spookfiles.Koppelvlak.A
             list.AddRange(new[] {"segment_id", "measurement_time", "weather_type", "value", "certainty", "feed_id"});
             return list;
         }
+
+        public static List<string> FieldsThatShouldBePresentInVehicleState()
+        {
+            var list = new List<string>();
+            list.AddRange(new[] { "measurement_time", "vehicle_id", "vehicle_type", "vehicle_length", "feed_id" });
+            return list;
+        }
     }
 }

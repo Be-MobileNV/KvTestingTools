@@ -46,6 +46,7 @@ namespace Spookfiles.Testing.KvA.CLI
                                 return false;
                             if (i.freeflow_speed > 130 || i.freeflow_speed < 0)
                                 return false;
+                            
                         }
                         return true;
                     }
@@ -315,6 +316,70 @@ namespace Spookfiles.Testing.KvA.CLI
                         }
                         return true;
                     }
+                },
+                new HttpResponseValidTest { RelativeUrl = GetVehicleStateLatest() },
+                new CheckCompletenessResponseTest
+                {
+                    RelativeUrl = GetVehicleStateLatest(),
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState()
+                },
+                new SanityCheck()
+                {
+                    RelativeUrl = GetVehicleStateLatest(),
+                    TypeToDeserialize = typeof(List<Vehiclestate>),
+                    CheckValidDataInsideFunctionHandler = o =>
+                    {
+                        foreach (var i in (List<Vehiclestate>)o)
+                        {
+                            if (i.measurement_time.ToUniversalTime() > DateTime.UtcNow)
+                                return false;
+                            
+                        }
+                        return true;
+                    }
+                },
+                
+                new HttpResponseValidTest { RelativeUrl = GetVehicleStateHistoric() },
+                new CheckCompletenessResponseTest
+                {
+                    RelativeUrl = GetVehicleStateHistoric(),
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState()
+                },
+                new SanityCheck()
+                {
+                    RelativeUrl = GetVehicleStateHistoric(),
+                    TypeToDeserialize = typeof(List<Vehiclestate>),
+                    CheckValidDataInsideFunctionHandler = o =>
+                    {
+                        foreach (var i in (List<Vehiclestate>)o)
+                        {
+                            if (i.measurement_time.ToUniversalTime() > DateTime.UtcNow)
+                                return false;
+
+                        }
+                        return true;
+                    }
+                },
+                new HttpResponseValidTest { RelativeUrl = GetWeatherForecastHistoric() },
+                new CheckCompletenessResponseTest
+                {
+                    RelativeUrl = GetWeatherForecastHistoric(),
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState()
+                },
+                new SanityCheck()
+                {
+                    RelativeUrl = GetVehicleStateHistoric(),
+                    TypeToDeserialize = typeof(List<Vehiclestate>),
+                    CheckValidDataInsideFunctionHandler = o =>
+                    {
+                        foreach (var i in (List<Vehiclestate>)o)
+                        {
+                            if (i.measurement_time.ToUniversalTime() > DateTime.UtcNow)
+                                return false;
+
+                        }
+                        return true;
+                    }
                 }
                 );
         }
@@ -331,6 +396,7 @@ namespace Spookfiles.Testing.KvA.CLI
                 new CheckCertificateTest { RelativeUrl = GetEventsLatest() }, // 2    
                 new CallingWithInvalidCredentials
                 {
+
                     RelativeUrl = GetEventsLatest(),
                     UseCredentials = HttpTestBase.AuthenticationMode.UseInvalidCredentials
                 }, // 3
@@ -339,7 +405,12 @@ namespace Spookfiles.Testing.KvA.CLI
                     RelativeUrl = GetEventsLatest(),
                     UseCredentials = HttpTestBase.AuthenticationMode.UseNoCredentials
                 }, // 4
-                new CheckHttpAvailableTest { RelativeUrl = GetEventsLatest() } // 5
+                new CheckHttpAvailableTest { RelativeUrl = GetEventsLatest() },
+                new CallingWithInvalidCredentials
+                {
+                    RelativeUrl = GetVehicleStateLatest(),
+                    UseCredentials = HttpTestBase.AuthenticationMode.UseNoCredentials
+                }// 5
                 );
         }
 
@@ -420,6 +491,20 @@ namespace Spookfiles.Testing.KvA.CLI
                 {
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInRoadSegments(),
                     RelativeUrl = GetRoadSegments(),
+                    IntervalTime = Options.PerformanceTestInterval,
+                    TestDuration = Options.PerformanceTestDuration
+                },
+                new KvAPerformanceTest
+                {
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState(),
+                    RelativeUrl = GetVehicleStateLatest(),
+                    IntervalTime = Options.PerformanceTestInterval,
+                    TestDuration = Options.PerformanceTestDuration
+                },
+                new KvAPerformanceTest
+                {
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState(),
+                    RelativeUrl = GetVehicleStateHistoric(),
                     IntervalTime = Options.PerformanceTestInterval,
                     TestDuration = Options.PerformanceTestDuration
                 }
@@ -505,6 +590,20 @@ namespace Spookfiles.Testing.KvA.CLI
                     RelativeUrl = GetRoadSegments(),
                     IntervalTime = Options.ContinuityTestInterval,
                     TestDuration = Options.ContinuityTestDuration
+                },
+                new KvAPerformanceTest
+                {
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState(),
+                    RelativeUrl = GetVehicleStateLatest(),
+                    IntervalTime = Options.ContinuityTestInterval,
+                    TestDuration = Options.ContinuityTestDuration
+                },
+                new KvAPerformanceTest
+                {
+                    FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState(),
+                    RelativeUrl = GetVehicleStateHistoric(),
+                    IntervalTime = Options.ContinuityTestInterval,
+                    TestDuration = Options.ContinuityTestDuration
                 }
                 );
         }
@@ -573,6 +672,16 @@ namespace Spookfiles.Testing.KvA.CLI
         private static string GetEventsHistoric()
         {
             return string.Format("/events/historic?{0}", GetStartAndEndTime());
+        }
+
+        private static string GetVehicleStateLatest()
+        {
+            return "/vehiclestate/latest";
+        }
+
+        private static string GetVehicleStateHistoric()
+        {
+            return string.Format("/vehiclestate/historic?{0}", GetStartAndEndTime());
         }
 
         #endregion
