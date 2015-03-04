@@ -13,7 +13,7 @@ namespace Spookfiles.Koppelvlak.A
             vehicle_length	integer	M	O	O	Voertuiglengte.
             feed_id 	integer		O	O	ID van de feed waarvan dit record afkomstig is indien een P1 partij het doorsturen van databronnen onderstuent.
             measurements	list<vehicle_measurement>		V	V	Voertuigmetingen zoals beschreven in de vehicle_measurement record definitie.
-
+            No also in the tests
          */
         public DateTime measurement_time { get; set; }
         public long vehicle_id { get; set; }
