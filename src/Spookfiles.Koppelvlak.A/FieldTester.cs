@@ -55,7 +55,7 @@ namespace Spookfiles.Koppelvlak.A
         public static List<string> FieldsThatShouldBePresentInVehicleState()
         {
             var list = new List<string>();
-            list.AddRange(new[] { "measurement_time", "vehicle_id", "vehicle_type", "vehicle_length", "feed_id" });
+            list.AddRange(new[] { "measurement_time", "vehicle_id", "measurements" });
             return list;
         }
     }
