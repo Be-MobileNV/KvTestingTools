@@ -46,7 +46,6 @@ namespace Spookfiles.Testing.KvA.CLI
                                 return false;
                             if (i.freeflow_speed > 130 || i.freeflow_speed < 0)
                                 return false;
-                            
                         }
                         return true;
                     }
@@ -95,7 +94,34 @@ namespace Spookfiles.Testing.KvA.CLI
                             if (i.start_time.Value.ToUniversalTime() >= DateTime.UtcNow)
                                 return false;
 
-                            if (i.event_code.Any(eventCode => eventCode < 1 || eventCode > 255))
+                            if (i.event_code.advice != null && (i.event_code.advice.value < 1 || i.event_code.advice.value > 255))
+                                return false;
+
+                            if (i.event_code.cause != null && (i.event_code.cause.value < 1 || i.event_code.cause.value > 255))
+                                return false;
+
+                            if (i.event_code.diversionRoadType != null && (i.event_code.diversionRoadType.value < 1 || i.event_code.diversionRoadType.value > 255))
+                                return false;
+
+                            if (i.event_code.effect != null && (i.event_code.effect.value < 1 || i.event_code.effect.value > 255))
+                                return false;
+
+                            if (i.event_code.laneRestriction != null && (i.event_code.laneRestriction.value < 1 || i.event_code.laneRestriction.value > 255))
+                                return false;
+
+                            if (i.event_code.restrictionType != null && (i.event_code.restrictionType.value < 1 || i.event_code.restrictionType.value > 255))
+                                return false;
+
+                            if (i.event_code.subCause != null && (i.event_code.subCause.value < 1 || i.event_code.subCause.value > 255))
+                                return false;
+
+                            if (i.event_code.tendency != null && (i.event_code.tendency.value < 1 || i.event_code.tendency.value > 255))
+                                return false;
+
+                            if (i.event_code.vehicleType != null && (i.event_code.vehicleType.value < 1 || i.event_code.vehicleType.value > 255))
+                                return false;
+
+                            if (i.event_code.warningLevel != null && (i.event_code.warningLevel.value < 1 || i.event_code.warningLevel.value > 255))
                                 return false;
 
                             if (i.start_time > i.expected_end_time)
@@ -127,7 +153,34 @@ namespace Spookfiles.Testing.KvA.CLI
                             if (i.start_time.Value.ToUniversalTime() >= DateTime.UtcNow)
                                 return false;
 
-                            if (i.event_code.Any(eventCode => eventCode < 1 || eventCode > 255))
+                            if (i.event_code.advice != null && (i.event_code.advice.value < 1 || i.event_code.advice.value > 255))
+                                return false;
+
+                            if (i.event_code.cause != null && (i.event_code.cause.value < 1 || i.event_code.cause.value > 255))
+                                return false;
+
+                            if (i.event_code.diversionRoadType != null && (i.event_code.diversionRoadType.value < 1 || i.event_code.diversionRoadType.value > 255))
+                                return false;
+
+                            if (i.event_code.effect != null && (i.event_code.effect.value < 1 || i.event_code.effect.value > 255))
+                                return false;
+
+                            if (i.event_code.laneRestriction != null && (i.event_code.laneRestriction.value < 1 || i.event_code.laneRestriction.value > 255))
+                                return false;
+
+                            if (i.event_code.restrictionType != null && (i.event_code.restrictionType.value < 1 || i.event_code.restrictionType.value > 255))
+                                return false;
+
+                            if (i.event_code.subCause != null && (i.event_code.subCause.value < 1 || i.event_code.subCause.value > 255))
+                                return false;
+
+                            if (i.event_code.tendency != null && (i.event_code.tendency.value < 1 || i.event_code.tendency.value > 255))
+                                return false;
+
+                            if (i.event_code.vehicleType != null && (i.event_code.vehicleType.value < 1 || i.event_code.vehicleType.value > 255))
+                                return false;
+
+                            if (i.event_code.warningLevel != null && (i.event_code.warningLevel.value < 1 || i.event_code.warningLevel.value > 255))
                                 return false;
 
                             if (i.start_time > i.expected_end_time)
@@ -360,10 +413,10 @@ namespace Spookfiles.Testing.KvA.CLI
                         return true;
                     }
                 },
-                new HttpResponseValidTest { RelativeUrl = GetWeatherForecastHistoric() },
+                new HttpResponseValidTest { RelativeUrl = GetVehicleStateHistoric() },
                 new CheckCompletenessResponseTest
                 {
-                    RelativeUrl = GetWeatherForecastHistoric(),
+                    RelativeUrl = GetVehicleStateHistoric(),
                     FieldsThatShouldBePresent = FieldTester.FieldsThatShouldBePresentInVehicleState()
                 },
                 new SanityCheck()

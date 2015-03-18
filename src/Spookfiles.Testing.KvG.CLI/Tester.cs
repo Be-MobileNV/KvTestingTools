@@ -170,9 +170,5 @@ namespace Spookfiles.Testing.CLI
             return "/fcd?last_message_time=0";
         }
 
-
-
-
-
     }
 }

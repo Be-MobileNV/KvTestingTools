@@ -60,11 +60,11 @@ namespace Spookfiles.Testing.Common
         /// <summary>
         /// History calls: Set number of minutes back in time for start datetime
         /// </summary>
-        public const int HistoryStartBackInTime = 30;
+        public const int HistoryStartBackInTime = 60+30;
         /// <summary>
         /// History calls: Set number of minutes back in time for end datetime
         /// </summary>
-        public const int HistoryEndBackInTime = 15;
+        public const int HistoryEndBackInTime = 60+15;
 #else
         /// <summary>
         /// History calls: Set number of minutes back in time for start datetime

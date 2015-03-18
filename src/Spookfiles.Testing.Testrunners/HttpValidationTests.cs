@@ -10,7 +10,15 @@ namespace Spookfiles.Testing.Testrunners
     {
         public static bool IsValidJson(WebHeaderCollection headers)
         {
-            return headers["Content-Type"].ToLowerInvariant().Contains("application/json");
+            try
+            {
+                return headers["Content-Type"].ToLowerInvariant().Contains("application/json");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
 
         /// <summary>
@@ -20,8 +28,16 @@ namespace Spookfiles.Testing.Testrunners
         /// <returns></returns>
         public static bool IsValidCharsetUtf8(WebHeaderCollection headers)
         {
-            return headers["Content-Type"].ToLowerInvariant().Contains("charset=utf-8") ||
-                   headers["Charset"].ToLowerInvariant().Contains("utf-8");
+            try
+            {
+                return headers["Content-Type"].ToLowerInvariant().Contains("charset=utf-8") ||
+       headers["Charset"].ToLowerInvariant().Contains("utf-8");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
     }
 }

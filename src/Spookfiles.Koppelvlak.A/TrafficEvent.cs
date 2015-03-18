@@ -18,7 +18,7 @@ namespace Spookfiles.Koppelvlak.A
 
         public int event_id { get; set; }
         public int Version { get; set; }
-        public List<int> event_code { get; set; }
+        public EventCode event_code { get; set; }
         public DateTime? start_time { get; set; }
         public DateTime? update_time { get; set; }
 
@@ -31,4 +31,27 @@ namespace Spookfiles.Koppelvlak.A
         public List<long> segment_id { get; set; }
         public List<int> feed_id { get; set; }
     }
+
+
+    public class EventCode
+    {
+        public TEC_code effect { get; set; }
+        public TEC_code cause { get; set; }
+        public TEC_code subCause { get; set; }
+        public TEC_code warningLevel { get; set; }
+        public TEC_code laneRestriction { get; set; }
+        public TEC_code advice { get; set; }
+        public TEC_code tendency { get; set; }
+        public TEC_code restrictionType { get; set; }
+        public TEC_code diversionRoadType { get; set; }
+        public TEC_code vehicleType { get; set; }
+    }
+
+    public class TEC_code
+    {
+        public string codeType { get; set; }
+        public int value { get; set; }
+    }
+
+
 }

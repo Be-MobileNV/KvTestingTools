@@ -50,11 +50,20 @@ namespace Spookfiles.Testing.Testrunners.Security
             }
             catch (WebException wex)
             {
-                var response = (HttpWebResponse) wex.Response;
-                if (response.StatusCode != HttpStatusCode.Accepted && response.StatusCode != HttpStatusCode.NotModified)
+                if (wex.Response != null && wex.Response is HttpWebResponse)
                 {
-                    res.Status = TestResult.OK;
-                    res.ExtraInformation = "Ok - received " + response.StatusCode + " (expected behaviour)";
+                    var response = (HttpWebResponse) wex.Response;
+                    if (response.StatusCode != HttpStatusCode.Accepted &&
+                        response.StatusCode != HttpStatusCode.NotModified)
+                    {
+                        res.Status = TestResult.OK;
+                        res.ExtraInformation = "Ok - received " + response.StatusCode + " (expected behaviour)";
+                    }
+                }
+                else
+                {
+                        res.Status = TestResult.OK;
+                        res.ExtraInformation = "Ok - cannot succeed due to " + wex.Message + " (not expected, but not invalid either)";
                 }
             }
             catch (Exception ex)
